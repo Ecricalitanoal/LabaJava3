@@ -4,21 +4,30 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * Класс для сравнения производительности операций ArrayList и LinkedList.
+ * Содержит методы для тестирования и вывода результатов сравнения времени выполнения
+ * основных операций (добавление, получение, удаление) для двух реализаций List.
+ */
 public class App {
 
+    /**
+     * Основной метод, выполняющий тестирование производительности ArrayList и LinkedList.
+     *
+     * @param args аргументы командной строки
+     */
     public static void main(String[] args) {
         int operations = 5000;
 
         List<Integer> arrayList = new ArrayList<>();
         List<Integer> linkedList = new LinkedList<>();
 
-        //array list test
+        // Тестирование ArrayList
         long timeAddArrayList = PerformanceTest.addTest(arrayList, operations);
         long timeGetArrayList = PerformanceTest.getTest(arrayList, operations);
         long timeDeleteArrayList = PerformanceTest.deleteTest(arrayList, operations);
 
-        //linked list test
+        // Тестирование LinkedList
         long timeAddLinkedList = PerformanceTest.addTest(linkedList, operations);
         long timeGetLinkedList = PerformanceTest.getTest(linkedList, operations);
         long timeDeleteLinkedList = PerformanceTest.deleteTest(linkedList, operations);
@@ -28,7 +37,19 @@ public class App {
                 timeAddLinkedList, timeGetLinkedList, timeDeleteLinkedList);
     }
 
-    public static void printTestResults(int operations, long timeAddArrayList, long timeGetArrayList, long timeDeleteArrayList,
+    /**
+     * Выводит в консоль результаты тестирования производительности в виде таблицы.
+     *
+     * @param operations количество выполненных операций
+     * @param timeAddArrayList время добавления для ArrayList (в наносекундах)
+     * @param timeGetArrayList время получения для ArrayList (в наносекундах)
+     * @param timeDeleteArrayList время удаления для ArrayList (в наносекундах)
+     * @param timeAddLinkedList время добавления для LinkedList (в наносекундах)
+     * @param timeGetLinkedList время получения для LinkedList (в наносекундах)
+     * @param timeDeleteLinkedList время удаления для LinkedList (в наносекундах)
+     */
+    public static void printTestResults(int operations,
+                                        long timeAddArrayList, long timeGetArrayList, long timeDeleteArrayList,
                                         long timeAddLinkedList, long timeGetLinkedList, long timeDeleteLinkedList) {
         String header = String.format("%-20s %-15s %-15s %-15s", "Операции", "ArrayList", "LinkedList", "Разница");
         String addRow = String.format("%-20s %-15d %-15d %-15d",
@@ -48,6 +69,5 @@ public class App {
         System.out.println(getRow);
         System.out.println(deleteRow);
         System.out.println(line);
-
     }
 }
